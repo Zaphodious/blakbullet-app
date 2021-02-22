@@ -1,7 +1,8 @@
 
 // export let api_root = "https://api.bullet.blakwurm.com/"
+export let api_root = "https://bulletapi.blakwurm.com/"
 // export let api_root = "http://localhost:4242/"
-export let api_root = "http://192.168.0.69:4242/"
+// export let api_root = "http://192.168.0.69:4242/"
 
 export let error = null
 export function reset_error() {
