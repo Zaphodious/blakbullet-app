@@ -87,6 +87,7 @@ function clear_new_task() {
 function make_action_modal(task, action, fieldtype, title, fieldname) {
     return function modalfn () {
         let display_value = task[fieldname]
+        console.log('field value is ', display_value)
         let isdate = false
         if (fieldtype === "date" || fieldtype === "datetime-local") {
             isdate = true
@@ -95,7 +96,8 @@ function make_action_modal(task, action, fieldtype, title, fieldname) {
             }
         }
         let actiondo = async function() {
-            let value = document.getElementById('modalfield').value
+            let newform = new FormData(document.getElementById('modalform'))
+            let value = newform.get('modalfield')
             if (isdate) {
                 console.log('newdate is ', value)
                 let datestring = fieldtype === "datetime-local" ? value+":00" : value+"T06:00:00"
@@ -104,6 +106,7 @@ function make_action_modal(task, action, fieldtype, title, fieldname) {
                 value = newdate.getTime() / 1000
                 console.log('newdate becomes ', value)
             }
+            console.log('value is ', value)
             await api.do_action(task.id, action, value)
             current_modal = null
         }
@@ -116,7 +119,7 @@ function make_action_modal(task, action, fieldtype, title, fieldname) {
             <label for="modalfield">To:</label>
         `
     current_modal = html`
-        <form class="modal ${task.kind}" onsubmit="return false">
+        <form id="modalform" class="modal ${task.kind}" onsubmit="return false">
             <h4>${title}</h4>
             ${labeling}
             ${input}

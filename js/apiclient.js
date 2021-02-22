@@ -186,7 +186,7 @@ function confirm_action(task_id, action, extra) {
 export async function do_action(task_id, action, extra) {
     let p = `task/${task_id}/action/${action}`
     if (extra) {
-        p=`${p}/${extra}`
+        p=`${p}/${encodeURIComponent(extra)}`
     }
     let carryon = confirm_action(task_id, action, extra)
     if (carryon) {

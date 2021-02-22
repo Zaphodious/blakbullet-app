@@ -89,6 +89,10 @@ form.modal input, form.modal textarea {
     margin: 2vmin;
 }
 
+textarea {
+    white-space: pre-line;
+}
+
 form.modal label {
     display: inline;
     width: 1em;
