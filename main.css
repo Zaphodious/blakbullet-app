@@ -110,7 +110,7 @@ label {
 }
 
 #tasklist ul li {
-    margin: 2vmin;
+    margin: 0.5em;
 }
 
 #tasklist ul li button {
@@ -171,7 +171,7 @@ label {
 
 .task {
     background-color: rgba(255,255,255,0.05);
-    padding: 2vmin;
+    padding: 0.5em;
 }
 
 .task * {
