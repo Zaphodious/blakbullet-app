@@ -102,7 +102,7 @@ function clear_new_task() {
 function make_action_modal(task, action, fieldtype, title, fieldname) {
     return function modalfn () {
         let display_value = task[fieldname]
-        console.log('field value is ', display_value)
+        // console.log('field value is ', display_value)
         let isdate = false
         if (fieldtype === "date" || fieldtype === "datetime-local") {
             isdate = true
@@ -114,14 +114,14 @@ function make_action_modal(task, action, fieldtype, title, fieldname) {
             let newform = new FormData(document.getElementById('modalform'))
             let value = newform.get('modalfield')
             if (isdate) {
-                console.log('newdate is ', value)
+                // console.log('newdate is ', value)
                 let datestring = fieldtype === "datetime-local" ? value+":00" : value+"T06:00:00"
                 let newdate = new Date(datestring)
-                console.log('newdate transitions ', newdate)
+                // console.log('newdate transitions ', newdate)
                 value = newdate.getTime() / 1000
-                console.log('newdate becomes ', value)
+                // console.log('newdate becomes ', value)
             }
-            console.log('value is ', value)
+            // console.log('value is ', value)
             await api.do_action(task.id, action, value)
             current_modal = null
         }
@@ -203,7 +203,7 @@ let initem_buttons_for_status = {
     ]
 }
 
-console.log(initem_buttons_for_status)
+// console.log(initem_buttons_for_status)
 
 let actionbuttons_list = (task) => html`
     <ul class='actionbuttons'>
@@ -227,7 +227,7 @@ function in_task_buttons(task) {
         if (typeof btn === 'function') {
             listo.push(btn(task))
         } else {
-            console.log(btn)
+            // console.log(btn)
         }
     }
     return html`
@@ -282,7 +282,7 @@ function is_task_today(task) {
     if (!task) {return false}
     let today = new Date()
     let tasktime = new Date(task.date*1000)
-    console.log(task.text, tasktime.toDateString())
+    // console.log(task.text, tasktime.toDateString())
     // console.log('dates are', today.toDateString(), tasktime.toDateString())
     return formatdate(Date.now()/1000) === formatdate(task.date)
 }
