@@ -195,6 +195,9 @@ let initem_buttons_for_status = {
     'struck': [
         actionbuttons.reactivate
     ],
+    'completed': [
+        actionbuttons.reactivate
+    ],
     'canceled': [
         actionbuttons.reactivate
     ]
