@@ -6,6 +6,17 @@ render_after(api.init())
 
 let current_modal = null
 
+let current_toast_message = null
+
+function set_toast(toast_message) {
+    console.log('setting toast')
+    current_toast_message = toast_message
+    setTimeout(render_after(function () {
+        current_toast_message = null
+        console.log('unset toast')
+    }), 3000)
+}
+
 function approx_into_future(date) {
     if (typeof date === 'string') {
         date = new Date(date)
@@ -52,6 +63,10 @@ function render_after(...fns) {
     return andthen(...fns, render_file)
 } 
 
+function render_after_toast(toast_message, ...fns) {
+    return andthen(...fns, render_file, ()=>set_toast(toast_message))
+} 
+
 let kind_options = (name="kind") => html`
     <select name=${name}>
             ${Object.entries(api.task_kinds).map(([k,v])=>html`
@@ -73,8 +88,8 @@ let newtask = () => html`
             <input id="newdue" name="duedate" type="datetime-local">
         </fieldset>
         <fieldset id="newbar">
-            <button @click=${render_after(api.make_new_task, clear_new_task)}>New Task</button>
-            <button @click=${render_after(api.make_new_note, clear_new_task)}>New Note</button>
+            <button @click=${render_after_toast('Making new task', api.make_new_task, clear_new_task)}>New Task</button>
+            <button @click=${render_after_toast('Making new note', api.make_new_note, clear_new_task)}>New Note</button>
         </fieldset>
     </form>
 `
@@ -234,20 +249,21 @@ function tasktext_templated(task) {
 }
 
 let task_template = (task, displayastoday) =>  {
+    let istoday = is_task_today(task)
     let ispast = is_task_past(task)
     let isfuture = is_task_future(task)
     let ispast_due = is_task_past_due(task)
     let isactive = task.kind === api.task_kinds.active
     let li_class = html``
     if (displayastoday) {
-        li_class = `${ispast ? 'past': 'ok'} task ${task.kind} ${ispast_due ? 'pastdue' : 'ok'}`
+        li_class = `${ispast ? 'past': 'today'} task ${task.kind} ${ispast_due ? 'pastdue' : 'ok'}`
     } else {
         li_class = `task ${task.kind}`
     }
     return html`
         <li class=${li_class}>
             <span class="taskkind">${cap_word(task.kind)}</span>
-            ${ispast && isactive ? html` <span class="taskdate">${formatdate(task.date)}</span> ` : null }
+            ${!istoday ? html` <span class="taskdate">${formatdate(task.date)}</span> ` : null}
             <span class="tasktext">${tasktext_templated(task)}</span>
             <span class="taskdue">${task.due ? `Due: ${formatdateandtime(task.due)}` : null}</span>
             <span class="taskmeta">${task.meta ? task.meta : null}</span>
@@ -263,8 +279,9 @@ function is_task_today(task) {
     if (!task) {return false}
     let today = new Date()
     let tasktime = new Date(task.date*1000)
+    console.log(task.text, tasktime.toDateString())
     // console.log('dates are', today.toDateString(), tasktime.toDateString())
-    return today.toDateString() === tasktime.toDateString()
+    return formatdate(Date.now()/1000) === formatdate(task.date)
 }
 
 function is_task_future(task) {
@@ -299,7 +316,8 @@ function is_task_past_due(task) {
 function is_task_viewable_today(task) {
     let istoday = is_task_today(task)
     let isactive = task.kind === api.task_kinds.active
-    return istoday || isactive
+    let ispast = is_task_past(task)
+    return istoday || (isactive && ispast)
 }
 
 let task_sublist = (title, id, filterfn, displayfn, visible, togglefn) =>  
@@ -348,7 +366,7 @@ function dated_task_sublist(title, id, filterfn, displayfn, visible, togglefn) {
     `
 }
 
-let visiblelists = {'attention': true, 'today':true, 'future':false, 'past': true}
+let visiblelists = {'attention': true, 'today':true, 'future':false, 'past': false}
 let togglevisible = (kind) => visiblelists[kind] = !visiblelists[kind]
 
 let tasklist = () => html`
@@ -408,6 +426,9 @@ function main_template() {
     ${api.error ? errorbanner() : null}
     ${api.current_user_data.username ? tasklist() : null}
     ${api.current_user_data.username ? null : tlogin()}
+    ${current_toast_message ? html`
+        <div id='toast'>${current_toast_message}</div> 
+    ` : null}
     ${current_modal ? html`
         <div id="modalblur" @click=${render_after(()=>{current_modal = null})}></div>
         <div id="modal">${current_modal}</div> 

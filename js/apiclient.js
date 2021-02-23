@@ -99,6 +99,7 @@ function import_task_list(tlist) {
     } else if (tlist.id) {
         tasklist[tlist.id] = tlist
     }
+    localStorage.setItem('tasklist', JSON.stringify(tasklist))
 }
 
 export async function fetch_todays_tasks() {
