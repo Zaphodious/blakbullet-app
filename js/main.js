@@ -11,11 +11,15 @@ let current_toast_message = null
 function set_toast(toast_message) {
     console.log('setting toast')
     current_toast_message = toast_message
+    render_file()
     setTimeout(render_after(function () {
         current_toast_message = null
         console.log('unset toast')
+        render_file()
     }), 3000)
 }
+
+window.set_toast = set_toast
 
 function approx_into_future(date) {
     if (typeof date === 'string') {
@@ -429,9 +433,7 @@ function main_template() {
     ${api.error ? errorbanner() : null}
     ${api.current_user_data.username ? tasklist() : null}
     ${api.current_user_data.username ? null : tlogin()}
-    ${current_toast_message ? html`
-        <div id='toast'>${current_toast_message}</div> 
-    ` : null}
+    <div id='toast' class='${current_toast_message ? 'active' : 'dormant'}'>${current_toast_message}</div> 
     ${current_modal ? html`
         <div id="modalblur" @click=${render_after(()=>{current_modal = null})}></div>
         <div id="modal">${current_modal}</div> 

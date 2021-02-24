@@ -282,10 +282,22 @@ label {
 
 #toast {
     position: fixed;
-    bottom: 16px;
+    bottom: -40px;
     right: 16px;
     left: 16px;
     height: auto;
     background: black;
     color: white;
+    padding: 1em;
+    border-radius: 1em;
+    transition-property: bottom;
+    transition-duration: 0.5s;
+}
+
+#toast.dormant {
+    bottom: -40px;
+}
+
+#toast.active {
+    bottom: 16px;
 }
