@@ -1,0 +1,26 @@
+
+@import './main.css';
+
+    
+form {
+    display: block;
+
+}
+
+form input {
+    width: 175px;
+}
+
+form label {
+    display: inline-block;
+    width: 95px;
+    text-align: right;
+}
+
+form button {
+    width: 300px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1.5em;
+}

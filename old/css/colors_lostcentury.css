@@ -1,0 +1,46 @@
+.theme-lostcentury {
+    --color-1: #d1b187;
+    --color-2: #c77b58;
+    --color-3: #ae5d40;
+    --color-4: #79444a;
+    --color-5: #4b3d44;
+    --color-6: #ba9158;
+    --color-7: #927441;
+    --color-8: #4d4539;
+    --color-9: #77743b;
+    --color-10: #b3a555;
+    --color-11: #d2c9a5;
+    --color-12: #8caba1;
+    --color-13: #4b726e;
+    --color-14: #574852;
+    --color-15: #847875;
+    --color-16: #ab9b8e;
+    
+    background-color: calc(var(--color-5)*2);
+
+    --main-background: var(--color-2);
+    --main-text: var(--color-13);
+    --button-background: var(--color-12);
+    --button-background-clicked: var(--color-10);
+    --button-text: var(--color-1);
+    --button-border: var(--color-4);
+    z-index: 0;
+}
+
+body {
+    background-color: var(--color-14);
+    color: var(--color-11);
+    box-shadow: 3px 3px black;
+
+}
+
+header {
+    background-color: var(--color-5);
+    border-bottom: 2px solid black;
+    box-shadow: 3px 3px black;
+    z-index: 100;
+}
+
+.theme-lostcentury button {
+    background-color: var(--color-6);
+}

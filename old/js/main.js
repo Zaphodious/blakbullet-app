@@ -1,4 +1,5 @@
-import {html, render} from './lib/lit-html/lit-html.js'
+// import {html, render} from './lib/lit-html/lit-html.js'
+import {html, render, transition as t} from './lib/bundledep.modern.js'
 import * as api from './apiclient.js'
 console.log('doing it')
 
@@ -267,7 +268,7 @@ let task_template = (task, displayastoday) =>  {
     } else {
         li_class = `task ${task.kind}`
     }
-    return html`
+    return t.mark(html`
         <li class=${li_class}>
             <span class="taskkind">${cap_word(task.kind)}</span>
             ${!istoday ? html` <span class="taskdate">${formatdate(task.date)}</span> ` : null}
@@ -278,7 +279,7 @@ let task_template = (task, displayastoday) =>  {
             <div class="taskclear"></div>
             ${in_task_buttons(task)}
             <!-- ${task.kind === "active" ? in_task_buttons(task) : null} -->
-        </li>`
+        </li>`)
 
 }
 
@@ -331,11 +332,16 @@ let task_sublist = (title, id, filterfn, displayfn, visible, togglefn) =>
     html`
     <div class="sublist">
         <h4 id="${id}">${title} <button class="viewlist" @click=${togglefn}>${visible ? '-' : "+"}</button></h4>
-        <ul>
-        ${ visible ? html`
-            ${Object.values(api.tasklist).filter(filterfn).sort((x,y)=>x.date-y.date).map(displayfn)}
-        ` : null }
-        </ul>
+        ${t.transition(
+            html`
+                <ul>
+                ${ visible ? html`
+                    ${Object.values(api.tasklist).filter(filterfn).sort((x,y)=>x.date-y.date).map(displayfn).map(t.mark)}
+                ` : null }
+                </ul>
+            
+            `
+        )}
         </div>
 ` 
 

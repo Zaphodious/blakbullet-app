@@ -36,22 +36,24 @@ export let tasklist = {}
 export async function init() {
     current_user_data = JSON.parse(localStorage.getItem('current_user_data')) || current_user_data
     tasklist = JSON.parse(localStorage.getItem('tasklist')) || tasklist
-    if (current_user_data.username) {
-        await fetch_all_tasks()
-    }
+    // if (current_user_data.username) {
+    //     await fetch_all_tasks()
+    // }
 }
 
 export function logout() {
     current_user_data = null_user_data
     tasklist = {}
+    localStorage.removeItem('current_user_data')
+    localStorage.removeItem('tasklist')
 }
 
-export async function login() {
+export async function login(formdata) {
     // Sometimes the first login attempt doesn't work.
     // If it doesn't work three times, then it probably won't
     for (let tries = 3; tries > 0; tries--) {
         try {
-            let res = await _login_logic()
+            let res = await _login_logic(formdata)
             return
         } catch (error) {
             console.error(error)
@@ -184,12 +186,15 @@ function confirm_action(task_id, action, extra) {
     return carryon
 }
 
-export async function do_action(task_id, action, extra) {
+export async function do_action(task_id, action, extra, confirm_needed = true) {
     let p = `task/${task_id}/action/${action}`
     if (extra) {
         p=`${p}/${encodeURIComponent(extra)}`
     }
-    let carryon = confirm_action(task_id, action, extra)
+    let carryon = true
+    if (confirm_needed) {
+        carryon = confirm_action(task_id, action, extra)
+    }
     if (carryon) {
         let serverlist = await makerequest(p, 'PUT')
         import_task_list(serverlist)

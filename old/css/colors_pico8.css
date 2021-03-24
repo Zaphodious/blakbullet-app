@@ -1,0 +1,25 @@
+.theme-pico8 {
+    --color-1: #000000;
+    --color-2: #1D2B53;
+    --color-3: #7E2553;
+    --color-4: #008751;
+    --color-5: #AB5236;
+    --color-6: #5F574F;
+    --color-7: #C2C3C7;
+    --color-8: #FFF1E8;
+    --color-9: #FF004D;
+    --color-10: #FFA300;
+    --color-11: #FFEC27;
+    --color-12: #00E436;
+    --color-13: #29ADFF;
+    --color-14: #83769C;
+    --color-15: #FF77A8;
+    --color-16: #FFCCAA;
+
+    --main-background: var(--color-2);
+    --main-text: var(--color-13);
+    --button-background: var(--color-12);
+    --button-background-clicked: var(--color-10);
+    --button-text: var(--color-1);
+    --button-border: var(--color-4);
+}

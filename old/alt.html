@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-default">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<header>
+    <h1>BBullet</h1>
+    <h2>User: <span class="username"></span>
+        <button name="logout" id="logoutbutton">Logout</button>
+    </h2>
+</header>
+<main>
+
+
+    <ul id="itemlist">
+        <span class="scrolltopanchor"></span>
+        <span class="scrollbottomanchor"></span>
+    </ul>
+
+</main>
+
+<footer>
+    <ul id="filterbar" class="buttonbar">
+        <li>
+            <button class="active" id="today-button">Today</button>    
+        </li>
+        <li>
+            <button id="future-button">Future</button>    
+        </li>
+        <li>
+            <button id="past-button">Past</button>    
+        </li>
+        <li>
+            <button id="search-button">&#128269;</button>
+        </li>
+    </ul>
+    <ul id="actionbar" class="buttonbar">
+        <li>
+            <button id="add-button">+</button>
+        </li>
+        <li>
+            <button id="refresh-button">&#8635;</button>
+        </li>
+    </ul>
+
+</footer>
+
+<div id="modal-blur" class="hidden"></div>
+
+<div id="add-new-modal" class="hidden modal">
+    <h1>Add New</h1>
+    <form id="newtask" onsubmit="return false">
+        <label for="text">Text</label>
+        <textarea name="text" id="newtask-text"></textarea>
+        <label for="duedate">Due</label>
+        <input type="datetime-local" name="duedate" id="duedate">
+        <button id="new-task-button">New Task</button>
+        <button id="new-note-button">New Note</button>
+        <button id="new-cancel-button" class='cancel'>Cancel</button>
+    </form>
+</div>
+
+<div id="all-actions-modal" class="hidden modal">
+    <h1>All Actions</h1>
+    <ul class="actionbuttons">
+        <li>
+            <button>Do it</button>
+            <button>Again</button>
+            <button>Home</button>
+        </li>
+    </ul>
+</div>
+
+
+<template id="t_taskitem">
+    <li class="taskitem" data-id=0>
+        <ul>
+            <li class="kind">
+                Active
+            </li>
+            <li class="text">
+                Foo
+            </li>
+            <li class="actions">
+                <ul>
+                    <li>
+                        <button class="action-defer">Def</button>
+                    </li>
+                    <li>
+                        <button class="action-defer">Nah</button>
+                    </li>
+                    <li>
+                        <button class="action-all">All</button>
+                    </li>
+                </ul>
+            </li>
+            <li class="date">
+                thedate
+            </li>
+            <li class="due"></li>
+        <div style='clear:both'></div>
+        </ul>
+    </li>
+</template>
+
+<template id="DisplayListItem">
+    <li class="taskitem" data-id=0>
+        <ul>
+            <li class="kind">
+                Active
+            </li>
+            <li class="text">
+                Foo
+            </li>
+            <li class="actions">
+                <ul>
+                    <li>
+                        <button class="action-defer">Def</button>
+                    </li>
+                    <li>
+                        <button class="action-defer">Nah</button>
+                    </li>
+                    <li>
+                        <button class="action-all">All</button>
+                    </li>
+                </ul>
+            </li>
+            <li class="date">
+                thedate
+            </li>
+            <li class="due"></li>
+        <div style='clear:both'></div>
+        </ul>
+    </li>
+</template>
+</body>
+<script src="./js/alt.js" type="module" defer> </script>
+</html>

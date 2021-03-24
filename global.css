@@ -1,0 +1,176 @@
+@import './fonts/OpenDyslexic.css';
+
+* {
+	font-family: 'OpenDyslexic', Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	padding: 0;
+	margin: 0;
+	/* --primary-h: 276; */
+	--primary-h-mod: 0;
+	--primary-h: 270;
+	/* --primary-h: 0; */
+	--primary-s: 100%;
+	--primary-l: 10%;
+	--primary-a: 1;
+	--primary-col: hsla(
+		var(--primary-h),
+		var(--primary-s),
+		var(--primary-l),
+		var(--primary-a));
+
+	--glow-shadow: 2px 2px 7px hsl(calc(var(--primary-h) - 50 + var(--primary-h-mod)), var(--primary-s), 35%),
+	0 0 7px hsl(calc(var(--primary-h) + 20), var(--primary-s), 35%)
+            /* inset -2px -2px 4px hsl(calc(var(--primary-h) - 30), var(--primary-s), calc(var(--primary-l) + 15%)),
+            inset 2px 2px 4px hsl(calc(var(--primary-h) + 30), var(--primary-s), calc(var(--primary-l) + 15%)) */
+			;
+	--modal-shadow: 2px 2px 7px hsl(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), 25%),
+	-2px -2px 7px hsl(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), 25%);
+	--modal-main-shadow: inset 2px 2px 7px hsl(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), 25%),
+	inset -2px -2px 7px hsl(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), 25%);
+    --card-part-shadow: 
+        inset 1px 1px 7px hsl(calc(var(--primary-h) - 30 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 15%)),
+        inset -1px -1px 7px hsl(calc(var(--primary-h) + 30 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 20%))
+        ;
+	--border-chrome-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 30%));
+	--border-chrome-gradient: linear-gradient(
+            178deg,
+            hsla(calc(var(--primary-h) + 30 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 05%), 1),
+            hsla(calc(var(--primary-h) - 30 + var(--primary-h-mod)), calc(var(--primary-s) - 40%), calc(var(--primary-l) + 08%), 1)
+
+	);
+    --gradient-chrome: linear-gradient(
+            176deg,
+            hsla(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 06%), 0.9),
+            hsla(calc(var(--primary-h) - 20 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 08%), 0.9)
+	);
+    --gradient-subtle: linear-gradient(
+            155deg,
+            hsla(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 9%), 0.7),
+            hsla(calc(var(--primary-h) - 30 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 2%), 0.7)
+            );
+	--input-glow: 
+            0 0 2px hsl(calc(var(--primary-h) + 15 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 15%)),
+            2px 2px 6px hsl(calc(var(--primary-h) - 15 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 35%));
+	--button-back: linear-gradient(
+			170deg,
+			hsla(calc(var(--primary-h) + 20 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 17%), 0.4),
+			hsla(calc(var(--primary-h) - 20 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 17%), 0.4));
+	--button-click-back: linear-gradient(
+			170deg,
+			hsla(calc(var(--primary-h) - 80 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 25%), 0.8),
+			hsla(calc(var(--primary-h) + 80 + var(--primary-h-mod)), var(--primary-s), calc(var(--primary-l) + 25%), 0.8));
+	--text-color: hsl(var(--primary-h), var(--primary-s), 90%);
+	--electric-violet: #9900ff;
+	--mango: #ffbe0bff;
+	--orange-pantone: #fb5607ff;
+	--winter-sky: #ff006eff;
+	--opal: #b6d6ccff;
+
+	--space-cadet: #29274cff;
+	--orchid-crayola: #d295bfff;
+	--cameo-pink: #e6bccdff;
+	--cedar-chest: #d5573bff;
+
+	--carolina-blue: #39a0edff;
+	--sea-green-crayola: #36f1cd55;
+	--mountain-meadow: #13c4a3ff;
+	--black-olive: #32322cff;
+
+}
+
+
+body {
+	color: var(--text-color);
+	/* color: white; */
+	mix-blend-mode: difference;
+	display: block;
+	--nine-width: 11.11vw;
+	--nine-height: 11.11vh;
+	--basecolor: var(--primary-col);
+	background: hsl(var(--primary-h), calc(var(--primary-s) - 40%), 8%);
+	width: 100%;
+	/* grid-template-rows:
+		calc(1 * var(--nine-height))
+		calc(7 * var(--nine-height) )
+		calc(1 * var(--nine-height))
+	;
+
+	grid-template-columns: 100vw;
+	grid-template-areas: 'head' 'main' 'foot'; */
+}
+
+body > header {
+	grid-area: head;
+	z-index: 100;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 50px;
+}
+body > main {
+	display: block;
+	grid-area: main;
+	z-index: 0;
+}
+body > footer {
+	grid-area: foot;
+	z-index: 100;
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	height: 50px;
+}
+
+button, select {
+	color: var(--text-color);
+	background: var(--button-back);
+	box-shadow: var(--input-glow);
+	border: 1px outset;
+	--main-border-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 45%));
+	--deemph-border-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 25%));
+	border-color: var(--main-border-color);
+}
+button:hover, button:focus, select:hover, select:focus {
+	mix-blend-mode: screen;
+	color: white;
+	text-shadow: 1px 1px 7px rgba(0, 0, 0, 1);
+	border-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 25%));
+	background: linear-gradient(
+			170deg,
+			hsla(calc(var(--primary-h) - 80), var(--primary-s), calc(var(--primary-l) + 45%), 0.8),
+			hsla(calc(var(--primary-h) + 80), var(--primary-s), calc(var(--primary-l) + 45%), 0.8)
+
+	);
+	/* color: hsl(calc(var(--primary-h)), var(--primary-s), 50%); */
+	/* box-shadow: 3px 3px 10px hsl(calc(var(--primary-h) - 15), var(--primary-s), calc(var(--primary-l) + 20%)),
+				-3px -3px 10px hsl(calc(var(--primary-h) + 45), var(--primary-s), calc(var(--primary-l) + 15%)); */
+	outline: none;
+
+}
+button.active, button:active {
+	background: linear-gradient(
+			170deg,
+			hsla(calc(var(--primary-h) - 80), var(--primary-s), calc(var(--primary-l) + 15%), 0.8),
+			hsla(calc(var(--primary-h) + 80), var(--primary-s), calc(var(--primary-l) + 15%), 0.8)
+
+	);
+	box-shadow: inset 3px 3px 5px hsl(calc(var(--primary-h) - 45), var(--primary-s), calc(var(--primary-l) + 15%)),
+				inset -3px -3px 5px hsl(calc(var(--primary-h) + 45), var(--primary-s), calc(var(--primary-l) + 15%));
+
+}
+button.active:focus, button.active:hover {
+	background: hsl(var(--primary-h), var(--primary-s), var(--primnary-l));
+}
+button.selected {
+	background: linear-gradient(
+			170deg,
+			hsla(calc(var(--primary-h) - 80), var(--primary-s), calc(var(--primary-l) + 25%), 0.8),
+			hsla(calc(var(--primary-h) + 80), var(--primary-s), calc(var(--primary-l) + 25%), 0.8)
+
+	);
+	box-shadow: inset 1px 1px 5px hsl(calc(var(--primary-h) - 45), var(--primary-s), calc(var(--primary-l) + 15%)),
+				inset -1px -1px 5px hsl(calc(var(--primary-h) + 45), var(--primary-s), calc(var(--primary-l) + 15%));
+
+}
